@@ -37,16 +37,15 @@ export const licenseUser = (user, history) => async (dispatch) => {
       if (process.env.REACT_APP_DEFAULTAUTH === "fake") {
         var finallogin = JSON.stringify(data);
         finallogin = JSON.parse(finallogin)
-        data = finallogin.data;
-        if (finallogin.status === "success") {
+        if ((finallogin.subscriberID).length===36) {
           dispatch(licenseSuccess(data));
-          history('/dashboard-Vendor')
+          history('/pages-CompanySelectionPage')
         } else {
           dispatch(apiError(finallogin));
         }
       } else {
         dispatch(licenseSuccess(data));
-        history('/dashboard-Vendor')
+        history('/pages-CompanySelectionPage')
       }
     }
   } catch (error) {

@@ -10,14 +10,18 @@ import {
     // deleteCompanySelectionData as deleteCompanySelectionDataApi
 } from "../../helpers/fakebackend_helper";
 
-export const getCompanySelectionData = createAsyncThunk("companySelection/getCompanySelectionData", async () => {
+export const getCompanySelectionData = createAsyncThunk(
+  "companySelection/getCompanySelectionData",
+  async (_, { rejectWithValue }) => {
     try {
-        const response = getCompanySelectionDataApi();
-        return response;
+      const response = await getCompanySelectionDataApi();
+      return response;
     } catch (error) {
-        return error;
+      toast.error("Failed to fetch company selection data");
+      return rejectWithValue(error);
     }
-});
+  }
+);
 
 // export const addCompanySelectionData = createAsyncThunk("companySelection/addCompanySelectionData", async (team) => {
 //     try {

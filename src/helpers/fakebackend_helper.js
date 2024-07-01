@@ -1,6 +1,7 @@
 import { APIClient } from "./api_helper";
 
 import * as url from "./url_helper";
+import axios from "axios";
 
 const api = new APIClient();
 
@@ -16,9 +17,6 @@ export const isUserAuthenticated = () => {
   return getLoggedInUser() !== null;
 };
 
-
-
-
 // Register Method
 export const postFakeRegister = data => api.create(url.POST_FAKE_REGISTER, data);
 
@@ -33,6 +31,8 @@ export const getVendorDashboardData = data => api.get(url.GET_VENDOR_DASHBOARD_D
 
 // Login Method
 export const getSecurityGateData = data => api.get(url.GET_ERP_SECURITYGATE_DATA, data);
+
+export const getCompanySelectionData = team => api.get(url.GET_COMPANYSELECTIONDATA,team );
 
 // postForgetPwd
 export const postFakeForgetPwd = data => api.create(url.POST_FAKE_PASSWORD_FORGET, data);
@@ -349,11 +349,21 @@ export const addTeamData = (team) => api.create(url.ADD_NEW_TEAMDATA, team);
 export const updateTeamData = (team) => api.put(url.UPDATE_TEAMDATA, team);
 
 // Pages > CompanySelection
-export const getCompanySelectionData = (team) => api.get(url.GET_COMPANYSELECTIONDATA, team);
+// export const getCompanySelectionData = async (token) => {
+//   const config = {
+//     headers: { Authorization: `Bearer ${token}` }
+//   };
+
+//   try {
+//     const response = await axios.get(url.GET_COMPANYSELECTIONDATA, config);
+//     return response.data;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
 // export const deleteCompanySelectionData = (team) => api.delete(url.DELETE_TEAMDATA, { headers: { team } });
 // export const addCompanySelectionData = (team) => api.create(url.ADD_NEW_TEAMDATA, team);
 // export const updateCompanySelectionData = (team) => api.put(url.UPDATE_TEAMDATA, team);
-
 // File Manager
 
 // Folder
