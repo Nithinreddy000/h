@@ -1,26 +1,27 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, CardBody, Col, Container, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Form, Input, Label, Modal, ModalBody, Offcanvas, OffcanvasBody, Row, UncontrolledDropdown, FormFeedback } from 'reactstrap';
-import BreadCrumb from '../../../Components/Common/BreadCrumb';
-import DeleteModal from "../../../Components/Common/DeleteModal";
+import BreadCrumb from '../../Components/Common/BreadCrumb'; 
+import DeleteModal from "../../Components/Common/DeleteModal";
 import { ToastContainer } from 'react-toastify';
 
 //User Images
-import avatar2 from '../../../assets/images/users/avatar-2.jpg';
-import userdummyimg from '../../../assets/images/users/user-dummy-img.jpg';
+import avatar2 from '../../assets/images/users/avatar-2.jpg';
+import userdummyimg from '../../assets/images/users/user-dummy-img.jpg';
 
 //Small Images
-import smallImage9 from '../../../assets/images/small/img-9.jpg';
+import smallImage9 from '../../assets/images/small/img-9.jpg'
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 
 //import action
 import {
-    getonGetTeamDataData as onGetonGetTeamDataData,
+    
+    getCompanySelectionData as onGetCompanySelectionData,
     // deleteonGetTeamDataData as onDeleteCompanySelectionData,
     // addCompanySelectionData as onAddCompanySelectionData,
     // updateCompanySelectionData as onUpdateCompanySelectionData
-} from "../../../slices/thunks";
+} from "../../slices/thunks"; 
 
 // Formik
 import * as Yup from "yup";
@@ -49,7 +50,7 @@ const CompanySelectionPage = () => {
     const [modal, setModal] = useState(false);
 
     useEffect(() => {
-        dispatch(onGetonGetTeamDataData());
+        dispatch(onGetCompanySelectionData());
     }, [dispatch]);
 
     useEffect(() => {

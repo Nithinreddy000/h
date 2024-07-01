@@ -245,6 +245,9 @@ import PrivacyPolicy from "../pages/Pages/PrivacyPolicy";
 import TermsCondition from "../pages/Pages/TermsCondition";
 import JobLanding from "../pages/Landing/Job";
 
+//LicenseValidation
+import LicenseValidation from "../pages/LicenseValidation/LicenseValidation";
+
 const authProtectedRoutes = [
   { path: "/dashboard-analytics", component: <DashboardAnalytics /> },
   { path: "/dashboard-crm", component: <DashboardCrm /> },
@@ -284,8 +287,6 @@ const authProtectedRoutes = [
   { path: "/apps-job-categories", component: <JobCategories /> },
   { path: "/apps-api-key", component: <APIKey /> },
 
-  // CompanySelectionSlice
-  { path: "/pages-CompanySelectionPage", component: <CompanySelectionPage /> },
   
   //Chat
   { path: "/apps-chat", component: <Chat /> },
@@ -464,6 +465,11 @@ const publicRoutes = [
   { path: "/login", component: <Login /> },
   { path: "/forgot-password", component: <ForgetPasswordPage /> },
   { path: "/register", component: <Register /> },
+   //LicenseValidation
+   { path: "/pages-LicenseValidation", component: <LicenseValidation /> },
+
+   // CompanySelection
+   { path: "/pages-CompanySelectionPage", component: <CompanySelectionPage /> },
 
   //AuthenticationInner pages
   { path: "/auth-signin-basic", component: <BasicSignIn /> },

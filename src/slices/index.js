@@ -12,6 +12,9 @@ import AccountReducer from "./auth/register/reducer";
 import ForgetPasswordReducer from "./auth/forgetpwd/reducer";
 import ProfileReducer from "./auth/profile/reducer";
 
+//LicenseValidation
+import licenseReducer from "./LicenseValidation/reducer";
+
 //Calendar
 import CalendarReducer from "./calendar/reducer";
 //Chat
@@ -107,7 +110,8 @@ const rootReducer = combineReducers({
     ERPDashboard: ERPDashboardReducer,
     VendorDashboard: VendorDashboardReducer,
     SecurityGate: SecurityGateReducer,
-    CompanySelectionPage : CompanySelectionReducer,
+    companySelectionPage : CompanySelectionReducer,
+    LicenseValidation : licenseReducer,
 
 });
 

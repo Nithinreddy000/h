@@ -70,6 +70,9 @@ export const postJwtRegister = (url, data) => {
 // Login Method
 export const postJwtLogin = data => api.create(url.POST_FAKE_JWT_LOGIN, data);
 
+// License Validation
+export const LicenseValidation = data => api.create(url.License_Validation , data);
+
 // postForgetPwd
 export const postJwtForgetPwd = data => api.create(url.POST_FAKE_JWT_PASSWORD_FORGET, data);
 
@@ -346,7 +349,7 @@ export const addTeamData = (team) => api.create(url.ADD_NEW_TEAMDATA, team);
 export const updateTeamData = (team) => api.put(url.UPDATE_TEAMDATA, team);
 
 // Pages > CompanySelection
-export const getCompanySelectionData = (team) => api.get(url.GET_TEAMDATA, team);
+export const getCompanySelectionData = (team) => api.get(url.GET_COMPANYSELECTIONDATA, team);
 // export const deleteCompanySelectionData = (team) => api.delete(url.DELETE_TEAMDATA, { headers: { team } });
 // export const addCompanySelectionData = (team) => api.create(url.ADD_NEW_TEAMDATA, team);
 // export const updateCompanySelectionData = (team) => api.put(url.UPDATE_TEAMDATA, team);

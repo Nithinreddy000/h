@@ -8,6 +8,10 @@ export const GET_VENDOR_DASHBOARD_DATA = "/api/InfinityX/DashboardData";
 export const GET_ERP_SECURITYGATE_DATA = "/api/InfinityX/SecurityGateData";
 
 export const POST_FAKE_JWT_LOGIN = "/post-jwt-login";
+//License Validation
+export const License_Validation = "https://api5.codeplayers.in/api/authentication/authenticate";
+
+
 export const POST_FAKE_PASSWORD_FORGET = "/auth/forgot-password";
 export const POST_FAKE_JWT_PASSWORD_FORGET = "/jwt-forget-pwd";
 export const SOCIAL_LOGIN = "/social-login";
