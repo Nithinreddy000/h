@@ -5,7 +5,7 @@ import DataOverview from './DataOverview';
 // import Components
 import BreadCrumb from '../../Components/Common/BreadCrumb';
 
-const ERPDashboard = () => {
+const CompanySelection = () => {
 
 
     document.title="Infinit X | ERP";
@@ -13,7 +13,7 @@ const ERPDashboard = () => {
         <React.Fragment>
             <div className="page-content">
                 <Container fluid>
-                    <BreadCrumb title="ERP Dashboard" pageTitle="Infinit X" />
+                    <BreadCrumb title="Company Selection" pageTitle="Infinity X" />
                         <DataOverview />
                 </Container>
             </div>
@@ -21,4 +21,4 @@ const ERPDashboard = () => {
     );
 };
 
-export default ERPDashboard;
+export default CompanySelection;
