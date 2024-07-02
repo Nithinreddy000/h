@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Card, CardHeader, Col, Row } from 'reactstrap';
 import CountUp from "react-countup";
-import { fetchDashboardData } from '../../slices/thunks';
+import {fetchCompanySelectionData} from '../../slices/thunks';
 import { createSelector } from "reselect";
 
 
 const DataOverview = () => {
     const dispatch = useDispatch();
 
-    const selectLayoutState = (state) => state.ERPDashboard;
+    const selectLayoutState = (state) => state.CompanySelection;
   
     const userprofileData = createSelector(
       selectLayoutState,
@@ -19,7 +19,7 @@ const DataOverview = () => {
     const { user, success, error } = useSelector(userprofileData);
   
     useEffect(() => {
-      dispatch(fetchDashboardData());
+      dispatch(fetchCompanySelectionData());
     }, [dispatch]);
 
     return (

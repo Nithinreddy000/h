@@ -3,7 +3,7 @@ export * from "./layouts/thunk";
 
 // CompanySelectionPage
 
-export * from "./companySelectionPage/thunk"
+export * from "./Company_Selection/thunk";
 
 // Authentication
 export * from "./auth/login/thunk";

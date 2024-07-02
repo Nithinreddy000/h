@@ -32,7 +32,7 @@ export const getVendorDashboardData = data => api.get(url.GET_VENDOR_DASHBOARD_D
 // Login Method
 export const getSecurityGateData = data => api.get(url.GET_ERP_SECURITYGATE_DATA, data);
 
-export const getCompanySelectionData = team => api.get(url.GET_COMPANYSELECTIONDATA,team );
+export const getCompanySelectionData = user => api.get(url.GET_COMPANYSELECTIONDATA,user);
 
 // postForgetPwd
 export const postFakeForgetPwd = data => api.create(url.POST_FAKE_PASSWORD_FORGET, data);

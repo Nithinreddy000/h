@@ -15,7 +15,7 @@ import VendorDashboard from "../pages/VendorDashboard";
 import SecurityGate from "../pages/SecurityGate";
 
 // CompanySelection 
-import CompanySelectionPage from "../pages/CompanySelectionPage/CompanySelectionPage";
+import CompanySelection from "../pages/CompanySelection";
 
 //Calendar
 import MonthGrid from "../pages/Calendar/MonthGrid";
@@ -469,7 +469,7 @@ const publicRoutes = [
    { path: "/pages-LicenseValidation", component: <LicenseValidation /> },
 
    // CompanySelection
-   { path: "/pages-CompanySelectionPage", component: <CompanySelectionPage /> },
+   { path: "/pages-CompanySelection", component: <CompanySelection /> },
 
   //AuthenticationInner pages
   { path: "/auth-signin-basic", component: <BasicSignIn /> },

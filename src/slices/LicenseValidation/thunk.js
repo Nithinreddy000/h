@@ -39,13 +39,13 @@ export const licenseUser = (user, history) => async (dispatch) => {
         finallogin = JSON.parse(finallogin)
         if ((finallogin.subscriberID).length===36) {
           dispatch(licenseSuccess(data));
-          history('/pages-CompanySelectionPage')
+          history('/pages-CompanySelection')
         } else {
           dispatch(apiError(finallogin));
         }
       } else {
         dispatch(licenseSuccess(data));
-        history('/pages-CompanySelectionPage')
+        history('/pages-CompanySelection')
       }
     }
   } catch (error) {

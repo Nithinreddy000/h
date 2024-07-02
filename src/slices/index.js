@@ -1,7 +1,7 @@
 
 import { combineReducers } from "redux";
 
-import CompanySelectionReducer from "./companySelectionPage/reducer"
+import CompanySelectionReducer from "./Company_Selection/reducer"
 
 // Front
 import LayoutReducer from "./layouts/reducer";
@@ -110,7 +110,7 @@ const rootReducer = combineReducers({
     ERPDashboard: ERPDashboardReducer,
     VendorDashboard: VendorDashboardReducer,
     SecurityGate: SecurityGateReducer,
-    companySelectionPage : CompanySelectionReducer,
+    Company_Selection : CompanySelectionReducer,
     LicenseValidation : licenseReducer,
 
 });
