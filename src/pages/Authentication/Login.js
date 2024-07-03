@@ -133,9 +133,6 @@ const Login = (props) => {
                   <div>
                     <img src={clientLogo} alt="" height="50" width="212" />
                   </div>
-                  <p className="mt-3 fs-15 fw-medium">
-                    Sunil Sponge And Power Private Limited
-                  </p>
                 </div>
               </Col>
             </Row>
@@ -145,8 +142,8 @@ const Login = (props) => {
                 <Card className="mt-4">
                 <CardBody className="p-4" style={{ marginBottom: '-3.5rem' }}>
                     <div className="text-center mt-2">
-                      <h5 className="text-primary">Welcome Back </h5>
-                      <p className="text-muted">Login in to continue </p>
+                      <h5 className="text-primary"> Sunil Sponge And Power Private Limited </h5>
+                      <p className="text-muted">Company Code : SunilFive </p>
                     </div>
                     {error && error ? (
                       <Alert color="danger"> {error} </Alert>
