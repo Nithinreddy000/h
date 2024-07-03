@@ -15,7 +15,7 @@ import VendorDashboard from "../pages/VendorDashboard";
 import SecurityGate from "../pages/SecurityGate";
 
 // CompanySelection 
-import CompanySelection from "../pages/CompanySelection";
+import CompanySelection from "../pages/CompanySelection/CompanySelection";
 
 //Calendar
 import MonthGrid from "../pages/Calendar/MonthGrid";

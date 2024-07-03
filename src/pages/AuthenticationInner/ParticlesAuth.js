@@ -23,9 +23,9 @@ const ParticlesAuth = ({ children }) => {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-12">
-                                <div className="text-center">
-                                    <p className="mb-0 text-muted">&copy; {new Date().getFullYear()} CODEPLAYERS Business System Private Limited </p>
-                                </div>
+                            <div className="text-center mt-1 mt-md-3">
+                            <p className="mb-0 text-muted">&copy; {new Date().getFullYear()} CODEPLAYERS Business System Private Limited </p>
+                            </div>
                             </div>
                         </div>
                     </div>

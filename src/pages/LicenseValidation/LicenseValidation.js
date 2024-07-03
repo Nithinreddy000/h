@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ldrs from 'ldrs';
 import {
   Card,
   CardBody,
@@ -12,10 +13,10 @@ import {
   FormFeedback,
   Alert,
   Spinner,
-} from "reactstrap"; //Used for UI Components
+} from "reactstrap"; // Used for UI Components
 import ParticlesAuth from "../AuthenticationInner/ParticlesAuth";
 
-//redux
+// redux
 import { useSelector, useDispatch } from "react-redux";
 
 import { Link } from "react-router-dom";
@@ -29,18 +30,20 @@ import {
   licenseUser,
   licensesocialLogin,
   resetLicenseFlag,
-} from "../../slices/thunks"; //Used for API Logics
+} from "../../slices/thunks"; // Used for API Logics
 
-//type it
-
+// type it
 import TypeIt from "typeit";
 
-import infinity from "../../assets/images/infinity.png";
+import infinity2 from "../../assets/infinity2.png";
 import { createSelector } from "reselect";
-//import images
+import { infinity } from 'ldrs';
+
+infinity.register();
+// import images
 
 const LicenseValidation = (props) => {
-  const dispatch = useDispatch(); //Used for API connection
+  const dispatch = useDispatch(); // Used for API connection
   const selectLayoutState = (state) => state;
   const loginpageData = createSelector(selectLayoutState, (state) => ({
     user: state.Account.user,
@@ -49,10 +52,11 @@ const LicenseValidation = (props) => {
     errorMsg: state.Login.errorMsg,
   }));
   // Inside your component
-  const { user, error, loading, errorMsg } = useSelector(loginpageData);
-
+  const { user, error, errorMsg } = useSelector(loginpageData);
   const [userLogin, setUserLogin] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
+  const [localLoading, setLocalLoading] = useState(false); // Local loading state
+  const [loading, setLoading] = useState(true); // Initial loading state set to true
 
   useEffect(() => {
     if (user && user) {
@@ -84,7 +88,10 @@ const LicenseValidation = (props) => {
       password: Yup.string().required("Please Enter Your Password"),
     }),
     onSubmit: (values) => {
-      dispatch(licenseUser(values, props.router.navigate));
+      setLocalLoading(true); // Start local loading
+      dispatch(licenseUser(values, props.router.navigate)).finally(() => {
+        setLocalLoading(false); // End local loading after dispatch
+      });
     },
   });
 
@@ -92,15 +99,7 @@ const LicenseValidation = (props) => {
     dispatch(licensesocialLogin(type, props.router.navigate));
   };
 
-  //handleTwitterLoginResponse
-  // const twitterResponse = e => {}
-
-  //for facebook and google authentication
-  const socialResponse = (type) => {
-    signIn(type);
-  };
   // TYPE_IT
-
   useEffect(() => {
     const handle = requestAnimationFrame(() => {
       const typeItInstance = new TypeIt(".text-description", {
@@ -125,24 +124,42 @@ const LicenseValidation = (props) => {
     }
   }, [dispatch, errorMsg]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   document.title = "Infinity-X | CODEPLAYERS Business System Private Limited";
   return (
     <React.Fragment>
       <ParticlesAuth>
         <div className="auth-page-content">
+          {(loading || localLoading) && (
+            <div className="loader-overlay">
+              <l-infinity
+                size="55"
+                stroke="4"
+                stroke-length="0.15"
+                bg-opacity="0.1"
+                speed="1.3"
+                color="white"
+              ></l-infinity>
+            </div>
+          )}
           <Container>
             <Row>
               <Col lg={12}>
                 <div className="text-center mt-sm-5 mb-4 text-white-50">
                   <div>
-                    <img src={infinity} alt="infinityLogo" height="60" width="212" />
+                    <img src={infinity2} alt="infinityLogo" height="60" width="212" />
                   </div>
-
                   <p className="text-description mt-3 fs-15 fw-medium"></p>
                 </div>
               </Col>
             </Row>
-
             <Row className="justify-content-center">
               <Col md={8} lg={6} xl={5}>
                 <Card className="mt-4">
@@ -150,7 +167,7 @@ const LicenseValidation = (props) => {
                     <div className="text-center mt-2">
                       <h5 className="text-primary">Welcome</h5>
                       <p className="text-muted">
-                        Sign in to continue to Infinity-x
+                        Login to continue to Infinity-x
                       </p>
                     </div>
                     {error && error ? (
@@ -167,7 +184,7 @@ const LicenseValidation = (props) => {
                       >
                         <div className="mb-3">
                           <Label htmlFor="email" className="form-label">
-                           Username
+                            Username
                           </Label>
                           <Input
                             name="email"
@@ -191,7 +208,6 @@ const LicenseValidation = (props) => {
                             </FormFeedback>
                           ) : null}
                         </div>
-
                         <div className="mb-3">
                           <div className="float-end">
                             <Link to="/forgot-password" className="text-muted">
@@ -236,7 +252,6 @@ const LicenseValidation = (props) => {
                             </button>
                           </div>
                         </div>
-
                         <div className="form-check">
                           <Input
                             className="form-check-input"
@@ -251,34 +266,43 @@ const LicenseValidation = (props) => {
                             Remember me
                           </Label>
                         </div>
-
                         <div className="mt-4">
                           <Button
                             color="success"
-                            disabled={error ? null : loading ? true : false}
+                            disabled={error ? null : localLoading ? true : false}
                             className="btn btn-success w-100"
                             type="submit"
                           >
-                            {loading ? (
+                            {localLoading ? (
                               <Spinner size="sm" className="me-2">
                                 {" "}
                                 Loading...{" "}
                               </Spinner>
                             ) : null}
-                            Sign In
+                            Login
                           </Button>
                         </div>
-
-                        
                       </Form>
                     </div>
                   </CardBody>
                 </Card>
-
-                
               </Col>
             </Row>
           </Container>
+          <style jsx>{`
+            .loader-overlay {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-color: #092537;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              z-index: 9999;
+            }
+          `}</style>
         </div>
       </ParticlesAuth>
     </React.Fragment>
