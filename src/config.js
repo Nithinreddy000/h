@@ -9,6 +9,5 @@ module.exports = {
   },
   api: {
     API_URL: "http://192.168.0.99:5000",
-    API_URL: "https://api5.codeplayers.in",
   }
 };

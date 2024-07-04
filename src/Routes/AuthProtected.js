@@ -24,7 +24,7 @@ const AuthProtected = (props) => {
 
   if (!userProfile && loading && !token) {
     return (
-      <Navigate to={{ pathname: "/login", state: { from: props.location } }} />
+      <Navigate to={{ pathname: "/pages-LicenseValidation", state: { from: props.location } }} />
     );
   }
 

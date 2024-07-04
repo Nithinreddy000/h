@@ -13,6 +13,8 @@ import DashboardJobs from "../pages/DashboardJob";
 import ERPDashboard from "../pages/ERPDashboard";
 import VendorDashboard from "../pages/VendorDashboard";
 import SecurityGate from "../pages/SecurityGate";
+//Main dashboard
+import MainDashboard from '../pages/MainDashboard';
 
 // CompanySelection 
 import CompanySelection from "../pages/CompanySelection/CompanySelection";
@@ -249,6 +251,7 @@ import JobLanding from "../pages/Landing/Job";
 import LicenseValidation from "../pages/LicenseValidation/LicenseValidation";
 
 const authProtectedRoutes = [
+  { path: "/main-dashboard", component: <MainDashboard /> },
   { path: "/dashboard-analytics", component: <DashboardAnalytics /> },
   { path: "/dashboard-crm", component: <DashboardCrm /> },
   { path: "/dashboard", component: <DashboardEcommerce /> },

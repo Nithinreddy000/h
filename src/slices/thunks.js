@@ -15,6 +15,8 @@ export * from "./auth/profile/thunk";
 export * from "./LicenseValidation/thunk";
 // Dashboard ERP
 export * from "./erpDashboard/thunk";
+//main dashboard
+export * from "./mainDashboard/thunk";
 export * from "./securityGate/thunk";
 export * from "./vendorDashboard/thunk";
 

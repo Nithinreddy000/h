@@ -10,7 +10,8 @@ export const GET_ERP_SECURITYGATE_DATA = "/api/InfinityX/SecurityGateData";
 export const POST_FAKE_JWT_LOGIN = "/post-jwt-login";
 //License Validation
 export const License_Validation = "https://api5.codeplayers.in/api/authentication/authenticate";
-
+//Main Dashboard
+export const GET_Main_DASHBOARD_DATA = "/api/InfinityX/DashboardData";
 
 export const POST_FAKE_PASSWORD_FORGET = "/auth/forgot-password";
 export const POST_FAKE_JWT_PASSWORD_FORGET = "/jwt-forget-pwd";
@@ -206,7 +207,7 @@ export const ADD_NEW_TEAMDATA = "/add/teamData";
 export const UPDATE_TEAMDATA = "/update/teamData";
 
 // Pages > CompanySelection
-export const GET_COMPANYSELECTIONDATA = "/api/ListOfCompanies/520259c3-3fa6-49a2-99cb-c8504de8fb29";
+export const GET_COMPANYSELECTIONDATA = "https://api5.codeplayers.in/api/ListOfCompanies/520259c3-3fa6-49a2-99cb-c8504de8fb29";
 // export const DELETE_COMPANYSELECTIONDATA = "/delete/teamData";
 // export const ADD_NEW_COMPANYSELECTIONDATA = "/add/teamData";
 // export const UPDATE_COMPANYSELECTIONDATA = "/update/teamData";

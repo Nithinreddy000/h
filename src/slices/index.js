@@ -27,6 +27,8 @@ import ProjectsReducer from "./projects/reducer";
 
 //Project
 import ERPDashboardReducer from "./erpDashboard/reducer";
+//main dashboard
+import MainDashboardReducer from "./mainDashboard/reducer";
 import SecurityGateReducer from "./securityGate/reducer";
 import VendorDashboardReducer from "./vendorDashboard/reducer";
 
@@ -108,6 +110,7 @@ const rootReducer = combineReducers({
     Jobs: JobReducer,
     APIKey: APIKeyReducer,
     ERPDashboard: ERPDashboardReducer,
+    MainDashboard: MainDashboardReducer,
     VendorDashboard: VendorDashboardReducer,
     SecurityGate: SecurityGateReducer,
     CompanySelection: CompanySelectionReducer,
