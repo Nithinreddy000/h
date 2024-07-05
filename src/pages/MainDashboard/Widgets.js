@@ -1,23 +1,35 @@
-import React, { useRef } from 'react';
-import CountUp from "react-countup";
+import React, { useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card, CardBody, Col } from 'reactstrap';
-import { ecomWidgets } from "../../common/data";
-
-// Import Swiper React components
+import { fetchMainDashboardData } from '../../slices/thunks';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-
-// Import required modules
 import { Navigation, Pagination } from 'swiper/modules';
+import { createSelector } from 'reselect';
+import 'font-awesome/css/font-awesome.min.css';
+import CountUp from 'react-countup';
 
 const Widgets = () => {
-    const upperSwiperRef = useRef(null); // useRef for upper Swiper
-    const lowerSwiperRef = useRef(null); // useRef for lower Swiper
+    const dispatch = useDispatch();
+
+    const selectLayoutState = (state) => state.MainDashboard;
+
+    const userprofileData = createSelector(
+        selectLayoutState,
+        (state) => ({ user: state.user, success: state.success, error: state.error })
+    );
+
+    const { user, success, error } = useSelector(userprofileData);
+
+    useEffect(() => {
+        dispatch(fetchMainDashboardData());
+    }, [dispatch]);
+
+    const upperSwiperRef = useRef(null);
+    const lowerSwiperRef = useRef(null);
 
     const handleUpperPrevClick = () => {
         if (upperSwiperRef.current && upperSwiperRef.current.swiper) {
@@ -43,9 +55,21 @@ const Widgets = () => {
         }
     };
 
+    const getIconAndColor = (voucherType) => {
+        switch (voucherType) {
+            case 'Security Gate':
+                return { icon: 'fa fa-lock', bgColor: 'green' };
+            case 'Weigh Bridge':
+                return { icon: 'fa fa-balance-scale', bgColor: 'blue' };
+            case 'ICFAI HYD':
+                return { icon: 'fa fa-university', bgColor: 'red' };
+            default:
+                return { icon: 'fa fa-question', bgColor: 'gray' };
+        }
+    };
+
     return (
         <React.Fragment>
-            {/* Upper Swiper */}
             <div className="fc-toolbar-chunk mb-3">
                 <div className="btn-group">
                     <button
@@ -86,7 +110,7 @@ const Widgets = () => {
             </div>
             <Swiper
                 spaceBetween={16}
-                slidesPerView={3} // Default number of slides per view
+                slidesPerView={3}
                 breakpoints={{
                     0: { slidesPerView: 1 },
                     768: { slidesPerView: 2 },
@@ -96,52 +120,54 @@ const Widgets = () => {
                 pagination={{ clickable: true }}
                 modules={[Navigation, Pagination]}
                 loop={true}
-                ref={upperSwiperRef} // Attach upperSwiperRef to upper Swiper
+                ref={upperSwiperRef}
             >
-                {ecomWidgets.map((item, key) => (
-                    <SwiperSlide key={key}>
-                        <Col xl={12} md={12} style={{ maxWidth: '100%', flex: '0 0 auto' }}>
-                            <Card className="card-animate">
-                                <CardBody>
-                                    <div className="d-flex align-items-center">
-                                        <div className="flex-grow-1 overflow-hidden">
-                                            <p className="text-uppercase fw-medium text-muted text-truncate mb-0">{item.label}</p>
+                {user.map((item, index) => {
+                    const { icon, bgColor } = getIconAndColor(item.voucherType);
+                    return (
+                        <SwiperSlide key={index}>
+                            <Col xl={12} md={12} style={{ maxWidth: '100%', flex: '0 0 auto' }}>
+                                <Card className="card-animate">
+                                    <CardBody>
+                                        {item.argumentValue.map((arg, idx) => (
+                                            <div key={idx} className="d-flex align-items-center mb-2">
+                                                <div className="flex-grow-1 overflow-hidden">
+                                                    <p className="text-uppercase fw-medium text-muted text-truncate mb-2">{arg.argument}</p>
+                                                </div>
+                                                <div className="flex-shrink-0">
+                                                    <h5 className="fs-14 mb-0">
+                                                        <CountUp
+                                                            start={0}
+                                                            end={parseFloat(arg.value)}
+                                                            decimals={1}
+                                                            duration={4}
+                                                        />
+                                                        {' '}
+                                                        %
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                        ))}
+                                        <div className="d-flex align-items-end justify-content-between mt-4">
+                                            <div>
+                                                <h4 className="fs-22 fw-semibold ff-secondary mb-4">
+                                                    <span className="counter-value"></span>{item.voucherType}
+                                                </h4>
+                                                <Link to="#" className="text-decoration-underline">Click to view More Details</Link>
+                                            </div>
+                                            <div className="avatar-sm flex-shrink-0">
+                                                <span className={`avatar-title rounded fs-3 bg-${bgColor}`}>
+                                                    <i className={icon}></i>
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div className="flex-shrink-0">
-                                            <h5 className={"fs-14 mb-0 text-" + item.badgeClass}>
-                                                {item.badge ? <i className={"fs-13 align-middle " + item.badge}></i> : null} {item.percentage} %
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div className="d-flex align-items-end justify-content-between mt-4">
-                                        <div>
-                                            <h4 className="fs-22 fw-semibold ff-secondary mb-4"><span className="counter-value" data-target="559.25">
-                                                <CountUp
-                                                    start={0}
-                                                    prefix={item.prefix}
-                                                    suffix={item.suffix}
-                                                    separator={item.separator}
-                                                    end={item.counter}
-                                                    decimals={item.decimals}
-                                                    duration={4}
-                                                />
-                                            </span></h4>
-                                            <Link to="#" className="text-decoration-underline">{item.link}</Link>
-                                        </div>
-                                        <div className="avatar-sm flex-shrink-0">
-                                            <span className={"avatar-title rounded fs-3 bg-" + item.bgcolor}>
-                                                <i className={`${item.icon}`}></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </SwiperSlide>
-                ))}
+                                    </CardBody>
+                                </Card>
+                            </Col>
+                        </SwiperSlide>
+                    );
+                })}
             </Swiper>
-
-            {/* Lower Swiper */}
             <div className="fc-toolbar-chunk mb-3">
                 <div className="btn-group">
                     <button
@@ -182,7 +208,7 @@ const Widgets = () => {
             </div>
             <Swiper
                 spaceBetween={16}
-                slidesPerView={3} // Default number of slides per view
+                slidesPerView={3}
                 breakpoints={{
                     0: { slidesPerView: 1 },
                     768: { slidesPerView: 2 },
@@ -192,49 +218,53 @@ const Widgets = () => {
                 pagination={{ clickable: true }}
                 modules={[Navigation, Pagination]}
                 loop={true}
-                ref={lowerSwiperRef} // Attach lowerSwiperRef to lower Swiper
+                ref={lowerSwiperRef}
             >
-                {ecomWidgets.map((item, key) => (
-                    <SwiperSlide key={key}>
-                        <Col xl={12} md={12} style={{ maxWidth: '100%', flex: '0 0 auto' }}>
-                            <Card className="card-animate">
-                                <CardBody>
-                                    <div className="d-flex align-items-center">
-                                        <div className="flex-grow-1 overflow-hidden">
-                                            <p className="text-uppercase fw-medium text-muted text-truncate mb-0">{item.label}</p>
+                {user.map((item, index) => {
+                    const { icon, bgColor } = getIconAndColor(item.voucherType);
+                    return (
+                        <SwiperSlide key={index}>
+                            <Col xl={12} md={12} style={{ maxWidth: '100%', flex: '0 0 auto' }}>
+                                <Card className="card-animate">
+                                    <CardBody>
+                                        {item.argumentValue.map((arg, idx) => (
+                                            <div key={idx} className="d-flex align-items-center mb-2">
+                                                <div className="flex-grow-1 overflow-hidden">
+                                                    <p className="text-uppercase fw-medium text-muted text-truncate mb-2">{arg.argument}</p>
+                                                </div>
+                                                <div className="flex-shrink-0">
+                                                    <h5 className="fs-14 mb-0">
+                                                        <CountUp
+                                                            start={0}
+                                                            end={parseFloat(arg.value)}
+                                                            decimals={1}
+                                                            duration={4}
+                                                        />
+                                                        {' '}
+                                                        %
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                        ))}
+                                        <div className="d-flex align-items-end justify-content-between mt-4">
+                                            <div>
+                                                <h4 className="fs-22 fw-semibold ff-secondary mb-4">
+                                                    <span className="counter-value"></span>{item.voucherType}
+                                                </h4>
+                                                <Link to="#" className="text-decoration-underline">Click to view More Details</Link>
+                                            </div>
+                                            <div className="avatar-sm flex-shrink-0">
+                                                <span className={`avatar-title rounded fs-3 bg-${bgColor}`}>
+                                                    <i className={icon}></i>
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div className="flex-shrink-0">
-                                            <h5 className={"fs-14 mb-0 text-" + item.badgeClass}>
-                                                {item.badge ? <i className={"fs-13 align-middle " + item.badge}></i> : null} {item.percentage} %
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div className="d-flex align-items-end justify-content-between mt-4">
-                                        <div>
-                                            <h4 className="fs-22 fw-semibold ff-secondary mb-4"><span className="counter-value" data-target="559.25">
-                                                <CountUp
-                                                    start={0}
-                                                    prefix={item.prefix}
-                                                    suffix={item.suffix}
-                                                    separator={item.separator}
-                                                    end={item.counter}
-                                                    decimals={item.decimals}
-                                                    duration={4}
-                                                />
-                                            </span></h4>
-                                            <Link to="#" className="text-decoration-underline">{item.link}</Link>
-                                        </div>
-                                        <div className="avatar-sm flex-shrink-0">
-                                            <span className={"avatar-title rounded fs-3 bg-" + item.bgcolor}>
-                                                <i className={`${item.icon}`}></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </SwiperSlide>
-                ))}
+                                    </CardBody>
+                                </Card>
+                            </Col>
+                        </SwiperSlide>
+                    );
+                })}
             </Swiper>
         </React.Fragment>
     );
