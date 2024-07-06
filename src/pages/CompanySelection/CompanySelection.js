@@ -132,30 +132,44 @@ const CompanySelection = () => {
         <React.Fragment>
             <ToastContainer closeButton={false} />
             {(loading || localLoading) && (
-                <div className="loader-overlay">
-                    <l-infinity
-                        size="55"
-                        stroke="4"
-                        stroke-length="0.15"
-                        bg-opacity="0.1"
-                        speed="1.3"
-                        color="white"
-                    ></l-infinity>
-                </div>
+               <div className="loader-overlay">
+               <div className="loader-container">
+                 <l-infinity
+                   size="55"
+                   stroke="4"
+                   stroke-length="0.15"
+                   bg-opacity="0.1"
+                   speed="1.3"
+                   color="white"
+                 ></l-infinity>
+                 <p className="validating-message">Selecting Company...</p>
+               </div>
+             </div>
             )}
             <style jsx>{`
-                .loader-overlay {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background-color: #092537;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    z-index: 9999;
-                }
+               .loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #092537;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  .loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .validating-message {
+    margin-top: 15px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
             `}</style>
             <div className="page-content" style={{ paddingTop: '1.5rem' }}>
                 <Container fluid>

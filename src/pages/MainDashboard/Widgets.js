@@ -70,11 +70,11 @@ const Widgets = () => {
 
     return (
         <React.Fragment>
-            <div className="fc-toolbar-chunk mb-3">
+            {/* <div className="fc-toolbar-chunk mb-3">
                 <div className="btn-group">
                     <button
                         type="button"
-                        title="Previous month"
+                        title="Previous Card"
                         aria-pressed="false"
                         className="fc-prev-button btn btn-primary"
                         onClick={handleUpperPrevClick}
@@ -83,7 +83,7 @@ const Widgets = () => {
                     </button>
                     <button
                         type="button"
-                        title="Next month"
+                        title="Next Card"
                         aria-pressed="false"
                         className="fc-next-button btn btn-primary"
                         onClick={handleUpperNextClick}
@@ -93,7 +93,6 @@ const Widgets = () => {
                 </div>
                 <button
                     type="button"
-                    title="This month"
                     aria-pressed="false"
                     className="fc-today-button btn btn-primary ms-3 d-none d-md-inline"
                 >
@@ -101,13 +100,12 @@ const Widgets = () => {
                 </button>
                 <button
                     type="button"
-                    title="This month"
                     aria-pressed="false"
                     className="fc-today-button btn btn-primary d-inline d-md-none ms-3"
                 >
                     INWARD
                 </button>
-            </div>
+            </div> */}
             <Swiper
                 spaceBetween={16}
                 slidesPerView={3}
@@ -139,11 +137,9 @@ const Widgets = () => {
                                                         <CountUp
                                                             start={0}
                                                             end={parseFloat(arg.value)}
-                                                            decimals={1}
                                                             duration={4}
                                                         />
                                                         {' '}
-                                                        %
                                                     </h5>
                                                 </div>
                                             </div>
@@ -168,11 +164,11 @@ const Widgets = () => {
                     );
                 })}
             </Swiper>
-            <div className="fc-toolbar-chunk mb-3">
+            {/* <div className="fc-toolbar-chunk mb-3">
                 <div className="btn-group">
                     <button
                         type="button"
-                        title="Previous month"
+                        title="Previous Card"
                         aria-pressed="false"
                         className="fc-prev-button btn btn-primary"
                         onClick={handleLowerPrevClick}
@@ -181,7 +177,7 @@ const Widgets = () => {
                     </button>
                     <button
                         type="button"
-                        title="Next month"
+                        title="Next Card"
                         aria-pressed="false"
                         className="fc-next-button btn btn-primary"
                         onClick={handleLowerNextClick}
@@ -191,7 +187,6 @@ const Widgets = () => {
                 </div>
                 <button
                     type="button"
-                    title="This month"
                     aria-pressed="false"
                     className="fc-today-button btn btn-primary ms-3 d-none d-md-inline"
                 >
@@ -199,14 +194,13 @@ const Widgets = () => {
                 </button>
                 <button
                     type="button"
-                    title="This month"
                     aria-pressed="false"
                     className="fc-today-button btn btn-primary d-inline d-md-none ms-3"
                 >
                     OUTWARD
                 </button>
-            </div>
-            <Swiper
+            </div> */}
+            {/* <Swiper
                 spaceBetween={16}
                 slidesPerView={3}
                 breakpoints={{
@@ -237,11 +231,9 @@ const Widgets = () => {
                                                         <CountUp
                                                             start={0}
                                                             end={parseFloat(arg.value)}
-                                                            decimals={1}
                                                             duration={4}
                                                         />
                                                         {' '}
-                                                        %
                                                     </h5>
                                                 </div>
                                             </div>
@@ -265,7 +257,7 @@ const Widgets = () => {
                         </SwiperSlide>
                     );
                 })}
-            </Swiper>
+            </Swiper> */}
         </React.Fragment>
     );
 };

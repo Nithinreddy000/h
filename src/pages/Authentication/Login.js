@@ -51,6 +51,8 @@ const Login = (props) => {
   const [showPassword, setShowPassword] = useState(false);
   const [localLoading, setLocalLoading] = useState(false); // Local loading state
   const [initialLoading, setInitialLoading] = useState(true); // Initial loading state
+  const [autoSubmitted, setAutoSubmitted] = useState(false); // Track auto submission
+
 
   useEffect(() => {
     if (user && user) {
@@ -94,6 +96,20 @@ const Login = (props) => {
   };
 
   useEffect(() => {
+    if (
+      validation.initialValues.email &&
+      validation.initialValues.password &&
+      !autoSubmitted
+    ) {
+      setAutoSubmitted(true);
+      setLocalLoading(true); // Start loading for auto-submit
+      setTimeout(() => {
+        validation.handleSubmit();
+      }, 2000); // Delay of 2 seconds
+    }
+  }, [validation.initialValues, autoSubmitted, validation]);
+
+  useEffect(() => {
     if (errorMsg) {
       setTimeout(() => {
         dispatch(resetLoginFlag());
@@ -114,18 +130,21 @@ const Login = (props) => {
     <React.Fragment>
       <ParticlesAuth>
         <div className="auth-page-content">
-          {(initialLoading || localLoading) && (
-            <div className="loader-overlay">
-              <l-infinity
-                size="55"
-                stroke="4"
-                stroke-length="0.15"
-                bg-opacity="0.1"
-                speed="1.3"
-                color="white"
-              ></l-infinity>
-            </div>
-          )}
+        {(initialLoading || localLoading) && (
+  <div className="loader-overlay">
+    <div className="loader-container">
+      <l-infinity
+        size="55"
+        stroke="4"
+        stroke-length="0.15"
+        bg-opacity="0.1"
+        speed="1.3"
+        color="white"
+      ></l-infinity>
+      <p className="validating-message">Redirecting to Dashboard...</p>
+    </div>
+  </div>
+)}
           <Container style={{ marginBottom: "-5%" }}>
             <Row>
               <Col lg={12}>
@@ -283,17 +302,28 @@ const Login = (props) => {
           </Container>
           <style jsx>{`
             .loader-overlay {
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              background-color:  #092537;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              z-index: 9999;
-            }
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #092537;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  .loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .validating-message {
+    margin-top: 15px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
           `}</style>
         </div>
       </ParticlesAuth>

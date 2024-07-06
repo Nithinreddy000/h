@@ -4,15 +4,15 @@ import { Col, Container, Row } from 'reactstrap';
 const Footer = () => {
     return (
         <React.Fragment>
-            <footer className="footer">
+            <footer className="footer" >
                 <Container fluid>
                     <Row>
                         <Col sm={6}>
-                            {new Date().getFullYear()} © Velzon.
+                            {new Date().getFullYear()} © InfinityX
                         </Col>
                         <Col sm={6}>
                             <div className="text-sm-end d-none d-sm-block">
-                                Design & Develop by Themesbrand
+                               CODEPLAYERS Business System Private Limited
                             </div>
                         </Col>
                     </Row>

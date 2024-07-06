@@ -57,6 +57,7 @@ const LicenseValidation = (props) => {
   const [showPassword, setShowPassword] = useState(false);
   const [localLoading, setLocalLoading] = useState(false); // Local loading state
   const [loading, setLoading] = useState(true); // Initial loading state set to true
+  const [autoSubmitted, setAutoSubmitted] = useState(false); // Track auto submission
 
   useEffect(() => {
     if (user && user) {
@@ -99,6 +100,20 @@ const LicenseValidation = (props) => {
     dispatch(licensesocialLogin(type, props.router.navigate));
   };
 
+  // Auto-login effect
+  useEffect(() => {
+    if (
+      validation.initialValues.email &&
+      validation.initialValues.password &&
+      !autoSubmitted
+    ) {
+      setAutoSubmitted(true);
+      setLocalLoading(true); // Start loading for auto-submit
+      setTimeout(() => {
+        validation.handleSubmit();
+      }, 2000); // Delay of 2 seconds
+    }
+  }, [validation.initialValues, autoSubmitted, validation]);
   // TYPE_IT
   useEffect(() => {
     const handle = requestAnimationFrame(() => {
@@ -147,6 +162,7 @@ const LicenseValidation = (props) => {
                 speed="1.3"
                 color="white"
               ></l-infinity>
+              <p className="validating-message">Validating...</p>
             </div>
           )}
           <Container>
@@ -298,9 +314,16 @@ const LicenseValidation = (props) => {
               height: 100%;
               background-color: #092537;
               display: flex;
+              flex-direction: column;
               justify-content: center;
               align-items: center;
               z-index: 9999;
+            }
+            .validating-message {
+              margin-top: 15px;
+              color: white;
+              font-size: 1.2rem;
+              font-weight: bold;
             }
           `}</style>
         </div>

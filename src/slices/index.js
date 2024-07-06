@@ -14,6 +14,8 @@ import ProfileReducer from "./auth/profile/reducer";
 
 //LicenseValidation
 import licenseReducer from "./LicenseValidation/reducer";
+//FinishedProducts
+import FinishedProductsReducer from "./finishedProducts/reducer";
 
 //Calendar
 import CalendarReducer from "./calendar/reducer";
@@ -115,7 +117,7 @@ const rootReducer = combineReducers({
     SecurityGate: SecurityGateReducer,
     CompanySelection: CompanySelectionReducer,
     LicenseValidation : licenseReducer,
-
+    FinishedProducts : FinishedProductsReducer,
 });
 
 export default rootReducer;

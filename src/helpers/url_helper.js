@@ -12,6 +12,8 @@ export const POST_FAKE_JWT_LOGIN = "/post-jwt-login";
 export const License_Validation = "https://api5.codeplayers.in/api/authentication/authenticate";
 //Main Dashboard
 export const GET_Main_DASHBOARD_DATA = "/api/InfinityX/DashboardData";
+//FinishedProducts
+export const GET_FINISHED_PRODUCTS_DATA = "/api/InfinityX/DashboardData";
 
 export const POST_FAKE_PASSWORD_FORGET = "/auth/forgot-password";
 export const POST_FAKE_JWT_PASSWORD_FORGET = "/jwt-forget-pwd";

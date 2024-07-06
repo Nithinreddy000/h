@@ -13,6 +13,8 @@ export * from "./auth/profile/thunk";
 
 //LicenseValidation
 export * from "./LicenseValidation/thunk";
+//FinishedProducts
+export * from "./finishedProducts/thunk";
 // Dashboard ERP
 export * from "./erpDashboard/thunk";
 //main dashboard

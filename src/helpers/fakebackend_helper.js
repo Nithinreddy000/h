@@ -26,6 +26,8 @@ export const postFakeLogin = data => api.create(url.POST_FAKE_LOGIN, data);
 // ERP Dashboard
 export const getERPDashboardData = data => api.get(url.GET_ERP_DASHBOARD_DATA, data);
 
+//FinishedProducts
+export const getFinishedProductsData = data => api.get(url.GET_FINISHED_PRODUCTS_DATA, data);
 // Main Dashboard
 export const getMainDashboardData = data => api.get(url.GET_Main_DASHBOARD_DATA, data);
 

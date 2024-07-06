@@ -15,7 +15,8 @@ import VendorDashboard from "../pages/VendorDashboard";
 import SecurityGate from "../pages/SecurityGate";
 //Main dashboard
 import MainDashboard from '../pages/MainDashboard';
-
+//FinishedProducts
+import FinishedProducts from "../pages/FinishedProducts";
 // CompanySelection 
 import CompanySelection from "../pages/CompanySelection/CompanySelection";
 
@@ -252,6 +253,7 @@ import LicenseValidation from "../pages/LicenseValidation/LicenseValidation";
 
 const authProtectedRoutes = [
   { path: "/main-dashboard", component: <MainDashboard /> },
+  { path: "/finished-products", component: <FinishedProducts /> },
   { path: "/dashboard-analytics", component: <DashboardAnalytics /> },
   { path: "/dashboard-crm", component: <DashboardCrm /> },
   { path: "/dashboard", component: <DashboardEcommerce /> },
