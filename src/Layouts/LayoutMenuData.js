@@ -5,6 +5,7 @@ const Navdata = () => {
   const history = useNavigate();
   //state data
   const [isDashboard, setIsDashboard] = useState(false);
+  const [isSecurityGate, setIsSecurityGate] = useState(false);
   const [isApps, setIsApps] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
   const [isPages, setIsPages] = useState(false);
@@ -118,6 +119,9 @@ const Navdata = () => {
     if (iscurrentState !== "Landing") {
       setIsLanding(false);
     }
+    if (iscurrentState !== "Security Gate") {
+      setIsSecurityGate(false);
+    }
   }, [
     history,
     iscurrentState,
@@ -152,6 +156,26 @@ const Navdata = () => {
         setIscurrentState("Dashboard");
         updateIconSidebar(e);
       },
+    },
+    {
+      id: "security_gate",
+      label: "Security Gate",
+      icon: "mdi mdi-gate",
+      link: "/securitygate-ERP",
+    },
+    {
+      id: "weighbridge",
+      label: "WeighBridge",
+      icon: "mdi mdi-scale",
+      link: "/weighbridge",
+    },
+    {
+      id: "inward_order",
+      label: "Inward Order",
+      icon: "mdi mdi-file-import",
+      link: "/voucher-num",
+    },
+    
       // subItems: [
       //   {
       //     id: "analytics",
@@ -196,7 +220,6 @@ const Navdata = () => {
       //     parentId: "dashboard",
       //   },
       // ],
-    },
     // {
     //   id: "apps",
     //   label: "Apps",
@@ -1471,3 +1494,4 @@ const Navdata = () => {
   return <React.Fragment>{menuItems}</React.Fragment>;
 };
 export default Navdata;
+
