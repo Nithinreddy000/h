@@ -33,7 +33,7 @@ export const licenseUser = (user, history) => async (dispatch) => {
     var data = await response;
 
     if (data) {
-      sessionStorage.setItem("authUser", JSON.stringify(data));
+      localStorage.setItem("authUser", JSON.stringify(data));
       if (process.env.REACT_APP_DEFAULTAUTH === "fake") {
         var finallogin = JSON.stringify(data);
         finallogin = JSON.parse(finallogin)
