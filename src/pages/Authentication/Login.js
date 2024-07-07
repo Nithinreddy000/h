@@ -24,6 +24,7 @@ import withRouter from "../../Components/Common/withRouter";
 // Formik validation
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 
 // actions
 import { loginUser, socialLogin, resetLoginFlag } from "../../slices/thunks"; // Used for API Logics
@@ -52,7 +53,26 @@ const Login = (props) => {
   const [localLoading, setLocalLoading] = useState(false); // Local loading state
   const [initialLoading, setInitialLoading] = useState(true); // Initial loading state
   const [autoSubmitted, setAutoSubmitted] = useState(false); // Track auto submission
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    // Check if email and password are stored in cookies
+    const email = localStorage.getItem("email2");
+    const password = localStorage.getItem("password2");
+    if (email && password) {
+      // Set the userLogin state with stored credentials
+      setUserLogin({ email, password });
+
+      // Automatically submit the form after 2 seconds if not already auto-submitted
+      if (!autoSubmitted) {
+        setAutoSubmitted(true);
+        setLocalLoading(true); // Start loading for auto-submit
+        setTimeout(() => {
+          validation.handleSubmit();
+        }, 2000); // Delay of 2 seconds
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (user && user) {
@@ -84,6 +104,8 @@ const Login = (props) => {
       password: Yup.string().required("Please Enter Your Password"),
     }),
     onSubmit: (values) => {
+      localStorage.setItem("email2", values.email);
+      localStorage.setItem("password2", values.password);
       setLocalLoading(true); // Start local loading
       dispatch(loginUser(values, props.router.navigate)).finally(() => {
         setLocalLoading(false); // End local loading after dispatch
@@ -95,19 +117,19 @@ const Login = (props) => {
     dispatch(socialLogin(type, props.router.navigate));
   };
 
-  useEffect(() => {
-    if (
-      validation.initialValues.email &&
-      validation.initialValues.password &&
-      !autoSubmitted
-    ) {
-      setAutoSubmitted(true);
-      setLocalLoading(true); // Start loading for auto-submit
-      setTimeout(() => {
-        validation.handleSubmit();
-      }, 2000); // Delay of 2 seconds
-    }
-  }, [validation.initialValues, autoSubmitted, validation]);
+  // useEffect(() => {
+  //   if (
+  //     validation.initialValues.email &&
+  //     validation.initialValues.password &&
+  //     !autoSubmitted
+  //   ) {
+  //     setAutoSubmitted(true);
+  //     setLocalLoading(true); // Start loading for auto-submit
+  //     setTimeout(() => {
+  //       validation.handleSubmit();
+  //     }, 2000); // Delay of 2 seconds
+  //   }
+  // }, [validation.initialValues, autoSubmitted, validation]);
 
   useEffect(() => {
     if (errorMsg) {
