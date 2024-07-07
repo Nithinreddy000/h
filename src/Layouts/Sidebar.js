@@ -5,6 +5,8 @@ import SimpleBar from "simplebar-react";
 import logoSm from "../assets/images/logo-sm.png";
 import logoDark from "../assets/images/logo-dark.png";
 import logoLight from "../assets/images/logo-light.png";
+import infinity2 from "../assets/infinity2.png";
+import favicon from "../assets/favicon.ico"
 
 //Import Components
 import VerticalLayout from "./VerticalLayouts";
@@ -39,19 +41,19 @@ const Sidebar = ({ layoutType }) => {
         <div className="navbar-brand-box">
           <Link to="/" className="logo logo-dark">
             <span className="logo-sm">
-              <img src={logoSm} alt="" height="22" />
+              <img src={favicon} alt="" height="22" />
             </span>
             <span className="logo-lg">
-              <img src={logoDark} alt="" height="17" />
+              <img src={infinity2} alt="" height="40" />
             </span>
           </Link>
 
           <Link to="/" className="logo logo-light">
             <span className="logo-sm">
-              <img src={logoSm} alt="" height="22" />
+              <img src={favicon} alt="" height="22" />
             </span>
             <span className="logo-lg">
-              <img src={logoLight} alt="" height="17" />
+              <img src={infinity2} alt="" height="40" />
             </span>
           </Link>
           <button
@@ -97,3 +99,4 @@ const Sidebar = ({ layoutType }) => {
 };
 
 export default Sidebar;
+
