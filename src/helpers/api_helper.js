@@ -46,16 +46,17 @@ class APIClient {
   //   return axios.get(url, params);
   // };
   get = async (url, params) => {
-    const token = JSON.parse(sessionStorage.getItem("authUser"))?.token;
+    const token = JSON.parse(localStorage.getItem("authUser"))?.token;
     if (token) setAuthorization(token);
 
     const queryString = params
       ? Object.keys(params).map(key => key + '=' + params[key]).join('&')
       : "";
       
-    const response = await axios.get(`${url}?${queryString}`);
+    const response = await axios.get(`${url}${queryString}`);
     return response;
   };
+  
   /**
    * post given data to url
    */
@@ -80,7 +81,7 @@ class APIClient {
   };
 }
 const getLoggedinUser = () => {
-  const user = sessionStorage.getItem("authUser");
+  const user = localStorage.getItem("authUser");
   if (!user) {
     return null;
   } else {
