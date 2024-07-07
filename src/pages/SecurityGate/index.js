@@ -9,12 +9,12 @@ import BreadCrumb from '../../Components/Common/BreadCrumb';
 const ERPDashboard = () => {
 
 
-    document.title="Infinit X | ERP";
+    document.title="Infinity X | ERP";
     return (
         <React.Fragment>
             <div className="page-content">
                 <Container fluid>
-                    <BreadCrumb title="Security Gate" pageTitle="Infinit X" />
+                    <BreadCrumb title="Security Gate" pageTitle="Infinity X" />
                         <CardView />
                         <ActivityView />
                 </Container>
