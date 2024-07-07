@@ -27,7 +27,7 @@ export const postFakeLogin = data => api.create(url.POST_FAKE_LOGIN, data);
 export const getERPDashboardData = data => api.get(url.GET_ERP_DASHBOARD_DATA, data);
 
 //FinishedProducts
-export const getFinishedProductsData = data => api.get(url.GET_FINISHED_PRODUCTS_DATA, data);
+export const getFinishedProductsData = data => api.create(url.GET_FINISHED_PRODUCTS_DATA, data);
 // Main Dashboard
 export const getMainDashboardData = data => api.get(url.GET_Main_DASHBOARD_DATA, data);
 
@@ -38,6 +38,12 @@ export const getVendorDashboardData = data => api.get(url.GET_VENDOR_DASHBOARD_D
 export const getSecurityGateData = data => api.get(url.GET_ERP_SECURITYGATE_DATA, data);
 
 export const getCompanySelectionData = data => api.get(url.GET_COMPANYSELECTIONDATA,data);
+
+//Voucher Num
+export const getVoucherNumData  = data => api.get(url.GET_VOUCHER_NUM_DATA,data);
+
+//Voucher Num
+export const getVoucherImagesNumData  = data => api.get(url.GET_VOUCHER_IMAGES_NUM_DATA,data);
 
 // postForgetPwd
 export const postFakeForgetPwd = data => api.create(url.POST_FAKE_PASSWORD_FORGET, data);
