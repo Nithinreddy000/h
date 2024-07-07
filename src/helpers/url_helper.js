@@ -13,7 +13,7 @@ export const License_Validation = "https://api5.codeplayers.in/api/authenticatio
 //Main Dashboard
 export const GET_Main_DASHBOARD_DATA = "/api/InfinityX/DashboardData";
 //FinishedProducts
-export const GET_FINISHED_PRODUCTS_DATA = "/api/InfinityX/DashboardData";
+export const GET_FINISHED_PRODUCTS_DATA = "/api/InfinityX/InventoryRegister";
 
 export const POST_FAKE_PASSWORD_FORGET = "/auth/forgot-password";
 export const POST_FAKE_JWT_PASSWORD_FORGET = "/jwt-forget-pwd";
@@ -213,8 +213,11 @@ export const GET_COMPANYSELECTIONDATA = "https://api5.codeplayers.in/api/ListOfC
 // export const DELETE_COMPANYSELECTIONDATA = "/delete/teamData";
 // export const ADD_NEW_COMPANYSELECTIONDATA = "/add/teamData";
 // export const UPDATE_COMPANYSELECTIONDATA = "/update/teamData";
+//Voucher Num
+export const GET_VOUCHER_NUM_DATA = "/api/InfinityX/VoucherNumData?VoucherNumID=DBD1BA91-0BE4-48F8-8703-554A5D4E898D";
 
-
+//Voucher Num
+export const GET_VOUCHER_IMAGES_NUM_DATA = "/api/InfinityX/VoucherNumCameraCaptures?VoucherNumID=5FE514A8-946E-4DEC-BB4D-C415FA5B875D";
 // File Manager
 // Folder
 export const GET_FOLDERS = "/folder";
@@ -249,3 +252,4 @@ export const GET_TASKS = "/apps/tasks";
 export const ADD_TASKS = "/add/tasks";
 export const UPDATE_TASKS = "/update/tasks";
 export const DELETE_TASKS = "/delete/tasks";
+
