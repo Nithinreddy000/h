@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 import ldrs from 'ldrs';
 import {
   Card,
@@ -60,6 +61,22 @@ const LicenseValidation = (props) => {
   const [autoSubmitted, setAutoSubmitted] = useState(false); // Track auto submission
 
   useEffect(() => {
+    const email = sessionStorage.getItem("email");
+    const password = sessionStorage.getItem("password");
+    
+    if (email && password && !autoSubmitted) {
+      setAutoSubmitted(true);
+      setLocalLoading(true); // Start loading for auto-submit
+  
+      setTimeout(() => {
+        validation.handleSubmit();
+      }, 2000); // Delay of 2 seconds before auto-submit
+    }
+  }, []);
+
+  
+  useEffect(() => {
+    // Check if user object exists and extract email and password
     if (user && user) {
       const updatedUserData =
         process.env.REACT_APP_DEFAULTAUTH === "firebase"
@@ -76,6 +93,25 @@ const LicenseValidation = (props) => {
     }
   }, [user]);
 
+  useEffect(() => {
+    // Check if email and password are stored in cookies
+    const email = localStorage.getItem("email");
+    const password = localStorage.getItem("password");
+    if (email && password) {
+      // Set the userLogin state with stored credentials
+      setUserLogin({ email, password });
+
+      // Automatically submit the form after 2 seconds if not already auto-submitted
+      if (!autoSubmitted) {
+        setAutoSubmitted(true);
+        setLocalLoading(true); // Start loading for auto-submit
+        setTimeout(() => {
+          validation.handleSubmit();
+        }, 2000); // Delay of 2 seconds
+      }
+    }
+  }, []);
+
   const validation = useFormik({
     // enableReinitialize : use this flag when initial values needs to be changed
     enableReinitialize: true,
@@ -89,31 +125,22 @@ const LicenseValidation = (props) => {
       password: Yup.string().required("Please Enter Your Password"),
     }),
     onSubmit: (values) => {
+      // Store credentials in session storage
+      localStorage.setItem("email", values.email);
+      localStorage.setItem("password", values.password);
+    
       setLocalLoading(true); // Start local loading
       dispatch(licenseUser(values, props.router.navigate)).finally(() => {
         setLocalLoading(false); // End local loading after dispatch
       });
     },
+    
   });
 
   const signIn = (type) => {
     dispatch(licensesocialLogin(type, props.router.navigate));
   };
 
-  // Auto-login effect
-  useEffect(() => {
-    if (
-      validation.initialValues.email &&
-      validation.initialValues.password &&
-      !autoSubmitted
-    ) {
-      setAutoSubmitted(true);
-      setLocalLoading(true); // Start loading for auto-submit
-      setTimeout(() => {
-        validation.handleSubmit();
-      }, 2000); // Delay of 2 seconds
-    }
-  }, [validation.initialValues, autoSubmitted, validation]);
   // TYPE_IT
   useEffect(() => {
     const handle = requestAnimationFrame(() => {
@@ -186,9 +213,9 @@ const LicenseValidation = (props) => {
                         Login to continue to Infinity-x
                       </p>
                     </div>
-                    {error && error ? (
+                    {error && (
                       <Alert color="danger"> {error} </Alert>
-                    ) : null}
+                    )}
                     <div className="p-2 mt-4">
                       <Form
                         onSubmit={(e) => {
@@ -212,17 +239,15 @@ const LicenseValidation = (props) => {
                             value={validation.values.email || ""}
                             invalid={
                               validation.touched.email &&
-                              validation.errors.email
-                                ? true
-                                : false
+                              !!validation.errors.email
                             }
                           />
                           {validation.touched.email &&
-                          validation.errors.email ? (
+                          validation.errors.email && (
                             <FormFeedback type="invalid">
                               {validation.errors.email}
                             </FormFeedback>
-                          ) : null}
+                          )}
                         </div>
                         <div className="mb-3">
                           <div className="float-end">
@@ -247,17 +272,15 @@ const LicenseValidation = (props) => {
                               onBlur={validation.handleBlur}
                               invalid={
                                 validation.touched.password &&
-                                validation.errors.password
-                                  ? true
-                                  : false
+                                !!validation.errors.password
                               }
                             />
                             {validation.touched.password &&
-                            validation.errors.password ? (
+                            validation.errors.password && (
                               <FormFeedback type="invalid">
                                 {validation.errors.password}
                               </FormFeedback>
-                            ) : null}
+                            )}
                             <button
                               className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted shadow-none"
                               onClick={() => setShowPassword(!showPassword)}
@@ -285,16 +308,15 @@ const LicenseValidation = (props) => {
                         <div className="mt-4">
                           <Button
                             color="success"
-                            disabled={error ? null : localLoading ? true : false}
+                            disabled={localLoading}
                             className="btn btn-success w-100"
                             type="submit"
                           >
-                            {localLoading ? (
+                            {localLoading && (
                               <Spinner size="sm" className="me-2">
-                                {" "}
-                                Loading...{" "}
+                                Loading...
                               </Spinner>
-                            ) : null}
+                            )}
                             Login
                           </Button>
                         </div>
@@ -333,3 +355,4 @@ const LicenseValidation = (props) => {
 };
 
 export default withRouter(LicenseValidation);
+
