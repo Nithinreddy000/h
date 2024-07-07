@@ -1,24 +1,31 @@
+
 import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
-  error: "",
-  success: "test", 
-  user: []
+  user: {},
+  error: "", // for error message
+  loading: false,
 };
 
-const FinishedProducts  = createSlice({
+const FinishedProducts = createSlice({
   name: "FinishedProducts",
   initialState,
-  reducers: { 
-    dataSuccess(state, action) {
-      state.success = "true";
+  reducers: {
+    apiError(state, action) {
+      state.error = action.payload.data;
+      state.loading = true;
+    },
+    FinishedProductsSuccess(state, action) {
       state.user = action.payload
+      state.loading = false;
+      state.errorMsg = false;
     },
   },
 });
 
 export const {
-    dataSuccess
+  apiError,
+  FinishedProductsSuccess,
 } = FinishedProducts.actions
 
 export default FinishedProducts.reducer;
